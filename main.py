@@ -1,3 +1,4 @@
+print("⚡️ Стартуем бота с токеном:", BOT_TOKEN)
 import os
 from aiogram import Bot, Dispatcher, types
 from aiogram.utils import executor
