@@ -1,4 +1,3 @@
-print("⚡️ Стартуем бота с токеном:", BOT_TOKEN)
 import os
 from aiogram import Bot, Dispatcher, types
 from aiogram.utils import executor
@@ -9,6 +8,7 @@ from handlers.tasks import register_task_handlers
 load_dotenv()
 
 BOT_TOKEN = os.getenv("BOT_TOKEN")
+print("⚡️ Стартуем бота с токеном:", BOT_TOKEN)  # Проверим, токен ли читается
 if not BOT_TOKEN:
     raise ValueError("BOT_TOKEN is not set")
 
@@ -19,6 +19,6 @@ dp = Dispatcher(bot)
 register_task_handlers(dp)
 
 # Старт
-if __name__ == "__main__":
+if name == "__main__":  # <-- Исправлено здесь
     print("🚀 Бот запущен")
     executor.start_polling(dp, skip_updates=True)
