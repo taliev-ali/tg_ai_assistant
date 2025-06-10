@@ -19,6 +19,6 @@ dp = Dispatcher(bot)
 register_task_handlers(dp)
 
 # Старт
-if name == "__main__":  # <-- Исправлено здесь
+if __name__ == "__main__":  # <-- Исправлено здесь
     print("🚀 Бот запущен")
     executor.start_polling(dp, skip_updates=True)
