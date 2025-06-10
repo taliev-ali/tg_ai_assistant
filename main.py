@@ -1,12 +1,23 @@
-from aiogram import Dispatcher, types
+import os
+from aiogram import Bot, Dispatcher, types
+from aiogram.utils import executor
+from dotenv import load_dotenv
 
-def register_task_handlers(dp: Dispatcher):
-    @dp.message_handler(commands=['tasks'])
-    async def list_tasks(message: types.Message):
-        from db.database import get_tasks
-        tasks = get_tasks(message.from_user.id)
-        if not tasks:
-            await message.reply("У тебя нет сохранённых задач.")
-        else:
-            reply = "\n".join([f"• {task[0]}" for task in tasks])
-            await message.reply(f"Твои задачи:\n{reply}")
+from handlers.tasks import register_task_handlers
+
+load_dotenv()
+
+BOT_TOKEN = os.getenv("BOT_TOKEN")
+if not BOT_TOKEN:
+    raise ValueError("BOT_TOKEN is not set")
+
+bot = Bot(token=BOT_TOKEN)
+dp = Dispatcher(bot)
+
+# Регистрируем хендлеры
+register_task_handlers(dp)
+
+# Старт
+if name == "__main__":
+    print("🚀 Бот запущен")
+    executor.start_polling(dp, skip_updates=True)
